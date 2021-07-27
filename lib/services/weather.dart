@@ -4,7 +4,14 @@ import '../services/location.dart';
 class WeatherModel {
   static final apiKey = '38c096173ed7b7fe54b2edb654773b6a';
 
-  static Future<dynamic> getWeatherData() async{
+  static Future<dynamic> getCityWeather(String cityName) async{
+    NetworkHelper networkHelper =  NetworkHelper(url: 'http://api.openweathermap.org/data/2.5/weather?q=$cityName&appid=$apiKey&units=metric');
+    print('http://api.openweathermap.org/data/2.5/weather?q=$cityName&appid=$apiKey&units=metric');
+    var data = await networkHelper.getData();
+    return data;
+  }
+
+  static Future<dynamic> getLocationWeather() async{
     Location loc = Location();
     await loc.getCurrentLocation();
     print(loc.longitude);
